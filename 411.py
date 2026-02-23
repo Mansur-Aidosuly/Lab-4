@@ -6,6 +6,7 @@ def patch_json(source, patch):
         if value is None:
             source.pop(key, None)
         elif key in source and isinstance(source[key], dict) and isinstance(value, dict):
+            #- If both dictionaries for this key contain nested dictionaries → patch_json is called recursively to update the nested structure.
             patch_json(source[key], value)
         else:
             source[key] = value
